@@ -1,0 +1,18 @@
+- name: sbu30-upgrade-logback-spring-1.4-config
+  description: Spring boot 3.0 Upgrade - Migrate logback configuration for logback 1.4
+  condition:
+    type: org.springframework.sbm.common.migration.conditions.TrueCondition
+  actions:
+
+    - type: org.springframework.sbm.engine.recipe.OpenRewriteDeclarativeRecipeAdapter
+      condition:
+        type: org.springframework.sbm.boot.common.conditions.IsSpringBootProject
+        versionPattern: "2\\.7\\..*|3\\.0\\..*"
+      description: Migrate logback 1.2 pattern abbreviations (e.g. %C{1.}) to logback 1.4 syntax
+      openRewriteRecipe: |-
+        type: specs.openrewrite.org/v1beta/recipe
+        name: org.springframework.sbm.boot.upgrade_27_30.Sbu30MigrateLogbackSpringPattern
+        displayName: Migrate logback 1.2 pattern abbreviations to logback 1.4
+        description: Replace logback 1.2 abbreviation arguments such as %C{1.} with the syntax accepted by logback 1.4
+        recipeList:
+          - org.springframework.sbm.boot.upgrade_27_30.MigrateLogbackSpringPattern
