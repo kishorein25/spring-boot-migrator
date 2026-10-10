@@ -48,6 +48,7 @@ public class BootUpgrade_27_30_MultiModule_IntegrationTest  extends IntegrationT
         applyRecipe("sbu30-upgrade-spring-cloud-dependency");
         applyRecipe("sbu30-upgrade-boot-version");
         applyRecipe("sbu30-migrate-to-jakarta-packages");
+        applyRecipe("sbu30-upgrade-thymeleaf-to-spring6");
         applyRecipe("sbu30-remove-construtor-binding");
         applyRecipe("sbu30-auto-configuration");
         applyRecipe("sbu30-225-logging-date-format");

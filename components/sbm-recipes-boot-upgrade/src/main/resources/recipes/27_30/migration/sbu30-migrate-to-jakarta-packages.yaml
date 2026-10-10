@@ -4,6 +4,19 @@
     type: org.springframework.sbm.common.migration.conditions.TrueCondition
   actions:
 
+    - type: org.springframework.sbm.engine.recipe.OpenRewriteDeclarativeRecipeAdapter
+      condition:
+        type: org.springframework.sbm.boot.common.conditions.IsSpringBootProject
+        versionPattern: "3\\.0\\..*"
+      description: Migrate javax.persistence references to jakarta.persistence independent of the compile classpath
+      openRewriteRecipe: |-
+        type: specs.openrewrite.org/v1beta/recipe
+        name: org.springframework.sbm.boot.upgrade_27_30.Sbu30MigrateJavaxPersistenceToJakarta
+        displayName: Migrate javax.persistence references to jakarta.persistence
+        description: Migrate javax.persistence references to jakarta.persistence independent of the compile classpath
+        recipeList:
+          - org.springframework.sbm.boot.upgrade_27_30.MigrateJavaxPersistenceToJakarta
+
     - type: org.springframework.sbm.engine.recipe.OpenRewriteNamedRecipeAdapter
       condition:
         type: org.springframework.sbm.boot.common.conditions.IsSpringBootProject
